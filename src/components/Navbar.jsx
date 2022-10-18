@@ -5,12 +5,20 @@ import {MenuOutlined, FundOutlined, BulbOutlined, HomeOutlined, MoneyCollectOutl
 import icon from '../images/cryptocurrency.png'
 
 const Navbar = () => {
+    const items = [
+        { label: 'item 1', key: 'item-1' }
+    ];
+
+
+
     return (
         <div className='nav-container'>
             <Avatar src={icon} size='large'/>
             <Typography.Title level={2} className='logo'>
                 <Link to='/'>Cryptoverse</Link>
             </Typography.Title>
+
+
             <Menu theme='dark'>
                 <Menu.Item icon={<HomeOutlined/>}>
                     <Link to='/'>Home</Link>
