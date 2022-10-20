@@ -30,7 +30,7 @@ export const App = () => {
                     </Typography.Title>
                     <Space>
                         <Link to='/'>Home</Link>
-                        <Link to='/exchange'>Exchange</Link>
+                        <Link to='/exchange'>Exchanges</Link>
                         <Link to='/news'>News</Link>
                     </Space>
                 </div>
