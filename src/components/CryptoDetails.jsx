@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {Col, Row, Typography, Select} from 'antd';
+import {Col, Row, Typography, Select, Spin} from 'antd';
 import {
     MoneyCollectOutlined,
     DollarCircleOutlined,
@@ -12,9 +12,10 @@ import {
     NumberOutlined,
     ThunderboltOutlined
 } from '@ant-design/icons';
-import {useGetCryptoDetailsQuery} from "../services/cryptoApi";
+import {useGetCryptoDetailsQuery, useGetCryptoHistoryQuery} from "../services/cryptoApi";
 import millify from "millify";
 import HTMLReactParser from "html-react-parser";
+import {LineChart} from "./LineChart";
 
 const {Text, Title} = Typography;
 const {Option} = Select
@@ -23,10 +24,11 @@ const CryptoDetails = () => {
     const {coinId} = useParams()
     const [timePeriod, setTimePeriod] = useState()
     const {data, isFetching} = useGetCryptoDetailsQuery(coinId)
-
-    const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
-
+    const {data: coinHistory} = useGetCryptoHistoryQuery({coinId, timePeriod})
     const cryptoDetails = data?.data?.coin;
+
+    if (isFetching) return <Spin/>
+    const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
     const stats = [
         {
@@ -93,7 +95,9 @@ const CryptoDetails = () => {
             >
                 {time.map(date => <Option key={date}>{date}</Option>)}
             </Select>
-
+            <LineChart coinHistory={coinHistory}
+                       currentPrice={millify(cryptoDetails.price)}
+                       coinName={cryptoDetails.name}/>
             <Col className='stats-container'>
                 <Col className='coin-value-statistics'>
                     <Col className='coin-value-statistics-heading'>
