@@ -22,6 +22,7 @@ const Cryptocurrencies = ({simplified}) => {
 
     if (isFetching) return <Spin/>
 
+
     return (
         <>
             {!simplified &&

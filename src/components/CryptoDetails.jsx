@@ -22,14 +22,12 @@ const {Option} = Select
 
 const CryptoDetails = () => {
     const {coinId} = useParams()
-    const [timePeriod, setTimePeriod] = useState()
+    const [timePeriod, setTimePeriod] = useState('7d')
     const {data, isFetching} = useGetCryptoDetailsQuery(coinId)
     const {data: coinHistory} = useGetCryptoHistoryQuery({coinId, timePeriod})
     const cryptoDetails = data?.data?.coin;
 
-    if (isFetching) return <Spin/>
     const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
-
     const stats = [
         {
             title: 'Price to USD',
@@ -54,6 +52,8 @@ const CryptoDetails = () => {
         },
     ];
 
+    console.log(coinHistory)
+
     const genericStats = [
         {title: 'Number Of Markets', value: cryptoDetails?.numberOfMarkets, icon: <FundOutlined/>},
         {title: 'Number Of Exchanges', value: cryptoDetails?.numberOfExchanges, icon: <MoneyCollectOutlined/>},
@@ -77,6 +77,8 @@ const CryptoDetails = () => {
     const setTimePeriodHandler = (value) => {
         setTimePeriod(value)
     }
+
+    if (isFetching) return <Spin/>
     return (
         <Col className='coin-detail-container'>
             <Col className='coin-heading-container'>
@@ -149,8 +151,8 @@ const CryptoDetails = () => {
                     <Title level={3} className='coin-details-heading'>
                         {cryptoDetails?.name} Links
                     </Title>
-                    {cryptoDetails?.links?.map(link => (
-                        <Row className='coin-link' key={link?.name}>
+                    {cryptoDetails?.links?.map((link, i) => (
+                        <Row className='coin-link' key={i}>
                             <Title level={5} className='link-name'>
                                 {link?.type}
                             </Title>
