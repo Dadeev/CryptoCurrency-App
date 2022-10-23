@@ -52,8 +52,6 @@ const CryptoDetails = () => {
         },
     ];
 
-    console.log(coinHistory)
-
     const genericStats = [
         {title: 'Number Of Markets', value: cryptoDetails?.numberOfMarkets, icon: <FundOutlined/>},
         {title: 'Number Of Exchanges', value: cryptoDetails?.numberOfExchanges, icon: <MoneyCollectOutlined/>},
