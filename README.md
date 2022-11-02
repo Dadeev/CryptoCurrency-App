@@ -2,4 +2,4 @@
 
 ![Cryptoverse](https://i.ibb.co/8gh5Jc8/image.png)
 
-You can visit this [react-app](https://crypto-app-dadeev.netlify.app/).
+### You can visit this [react-app](https://crypto-app-dadeev.netlify.app/).
